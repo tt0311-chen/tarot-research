@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <meta name="theme-color" content="#1a2336"/>
+  <meta name="description" content="私人三系統塔羅研究室：托特、偉特、馬賽，獨立牌堆、補牌、歷史與備份。"/>
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <link rel="icon" href="icon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <title>Tarot Research · 私人塔羅研究室</title>
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">✦</span><span class="brand-copy"><strong>Tarot Research</strong><small>PRIVATE TAROT JOURNAL</small></span></div>
+    <nav class="tabs" aria-label="導覽"><button type="button" class="nav-link active" data-view="draw">✧ 占卜</button><button type="button" class="nav-link" data-view="history">◷ 歷史</button><button type="button" class="nav-link" data-view="backup">⇪ 備份</button></nav>
+  </header>
+  <main class="main">
+    <section id="draw-view" class="view active">
+      <div class="hero"><div class="eyebrow">THOTH · RIDER–WAITE–SMITH · MARSEILLE</div><h1>同一個問題，<em>三個視角。</em></h1><p>把牌陣當作一場對話。每次洗牌先形成完整牌堆；補問時重新洗剩餘牌，原牌和底牌保留。</p></div>
+      <section class="panel" id="setup-panel">
+        <div class="panel-heading"><div><div class="step">01 · QUESTION</div><h2>建立占卜</h2></div><div class="pill">本機私人保存</div></div>
+        <form id="new-form">
+          <label for="session-title">占卜標題</label><input id="session-title" maxlength="150" value="關係現況" required placeholder="例如：沉默後的替代性"/>
+          <label for="session-question">完整原問題</label><textarea id="session-question" rows="4" maxlength="15000" required placeholder="請在洗牌之前輸入本次的完整問題…"></textarea>
+          <label for="session-positions">牌位（每行一個；可用「名稱｜提問」）</label><textarea id="session-positions" rows="6" maxlength="8000" required>目前狀態｜目前真正的狀態是什麼？
+主要因素｜最重要的影響因素？
+後續方向｜如果現況延續，可能呈現什麼方向？</textarea>
+          <label for="bottom-question">底牌說明</label><input id="bottom-question" value="影響整體狀態的深層因素" maxlength="1000"/>
+          <div class="field-title">獨立使用的牌系</div>
+          <div class="deck-select"><label><input type="checkbox" name="systems" value="thoth" checked/><span class="dot thoth"></span>托特 <small>Thoth</small></label><label><input type="checkbox" name="systems" value="rws" checked/><span class="dot rws"></span>偉特 <small>RWS</small></label><label><input type="checkbox" name="systems" value="marseille" checked/><span class="dot marseille"></span>馬賽 <small>Marseille</small></label></div>
+          <div class="mode-info"><span>♧</span><div><strong>完整牌堆模式</strong><small>78 張各自洗牌 → 模擬交錯／分疊／旋轉／切牌 → 固定牌序及正逆 → 順序發牌。底牌預留不參與補牌。</small></div></div>
+          <button class="btn primary wide" type="submit">洗牌並開始占卜 <span>→</span></button>
+        </form>
+      </section>
+      <div id="active-session" class="hidden"></div>
+    </section>
+    <section id="history-view" class="view"><div class="section-head"><div class="eyebrow">ARCHIVE</div><h1>歷史占卜</h1><p>保存每次問題、實際牌面、洗牌與補牌原文，過去抽出的牌不會被覆蓋。</p></div><div class="panel"><label for="history-search">搜尋標題與問題</label><input id="history-search" placeholder="輸入關鍵字…"/><div id="history-list" class="history-list"></div></div></section>
+    <section id="backup-view" class="view"><div class="section-head"><div class="eyebrow">OWN YOUR DATA</div><h1>備份與匯出</h1><p>紀錄只存於目前裝置的瀏覽器中；不會上傳到任何伺服器。請定期匯出 JSON 到你信任的位置。</p></div><div class="panel"><h2>資料管理</h2><div id="backup-stats" class="muted"></div><div class="backup-actions"><button id="export-json" class="btn primary" type="button">⇩ 完整 JSON 備份</button><button id="export-md" class="btn secondary" type="button">⇩ Markdown 全紀錄</button><button id="export-csv" class="btn secondary" type="button">⇩ CSV 索引</button></div><hr/><h3>匯入備份</h3><p class="muted">只接受本網站匯出的 JSON 格式；若占卜 ID 已存在，會跳過，避免覆蓋現有原始紀錄。</p><input id="import-file" type="file" accept=".json,application/json"/><button id="import-json" type="button" class="btn secondary">匯入 JSON</button><div class="privacy-note">⚠ 在 iPhone 清除網站資料、移除網頁 App、使用無痕模式或更換手機，都可能遺失本機紀錄。網頁與電腦資料不會自動同步。</div></div></section>
+  </main>
+  <footer>Private tarot research · 牌面採自製文字卡，避免未授權牌圖 · <span id="save-status">準備就緒</span></footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
